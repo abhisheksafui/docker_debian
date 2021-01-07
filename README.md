@@ -28,7 +28,7 @@ Example Playbook
   hosts: test 
   roles:                                                                        
                                                                                 
-    - role: /home/abhi/code/ansible/roles/install_docker_debian  
+    - role: /home/abhi/code/ansible/roles/docker_debian  
 
 License
 -------
