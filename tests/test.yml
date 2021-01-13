@@ -1,6 +1,7 @@
 ---                                                                             
 - name: "Test docker installation in a debian system"                                         
   hosts: test 
+  become: true
   roles:                                                                        
                                                                                 
-    - role: /home/abhi/code/ansible/roles/docker_debian  
+    - role: abhisheksafui.docker_debian  
