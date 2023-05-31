@@ -1,2 +1,6 @@
 ---
 # vars file for docker_debian
+deb_architecture: {
+    "aarch64": "arm64",
+    "x86_64": "amd64"
+}
