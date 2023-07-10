@@ -1,7 +1,6 @@
 ---                                                                             
 - name: "Test docker installation in a debian system"                                         
-  hosts: test 
+  hosts: desktop
   become: true
   roles:                                                                        
-                                                                                
-    - role: abhisheksafui.docker_debian  
+    - role: docker_debian  
