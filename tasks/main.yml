@@ -1,4 +1,8 @@
 ---
+- name: Get the user name of the user running the script
+  set_fact:
+    ansible_user: "{{ lookup('env','USER') }}"
+
 # tasks file for docker_debian
 - name: Uninstall old versions of Docker
   apt:
