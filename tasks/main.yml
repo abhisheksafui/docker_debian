@@ -1,7 +1,8 @@
 ---
-- name: Get the user name of the user running the script
+- name: If ansible_user not set, get the user name of the user running the script
   set_fact:
     ansible_user: "{{ lookup('env','USER') }}"
+  when: ansible_user is undefined
 
 # tasks file for docker_debian
 - name: Uninstall old versions of Docker
@@ -17,6 +18,7 @@
 
 - name: Install prerequisites
   apt:
+    update_cache: yes
     name:
       - ca-certificates
       - curl
@@ -37,6 +39,7 @@
 
 - name: Install packages
   apt:
+    update_cache: yes
     name:
       - docker-ce
       - docker-ce-cli
@@ -44,9 +47,14 @@
       - docker-buildx-plugin 
       - docker-compose-plugin
         
-- name: adding existing user "{{ ansible_user }}" to group docker
+- name: adding user "{{ ansible_user }}" to group docker
   user:
     name: "{{ ansible_user }}"
     groups: docker
     append: yes
   become: yes
+  when: ansible_user is defined
+
+- name: Not adding ansible user to docker group
+  cmd: echo "Use command: sudo usermod -aG docker $USER followed by logout and login" 
+  when: ansible_user is undefined
